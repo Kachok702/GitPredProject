@@ -15,15 +15,11 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
     }
 
     public void createUsersTable() {
-        final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS users (" +
-                "id BIGINT PRIMARY KEY AUTO_INCREMENT," +
-                "name VARCHAR (255) NOT NULL," +
-                "lastName VARCHAR (255) NOT NULL," +
-                "age TINYINT NOT NULL)";
+        final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS users (id BIGINT PRIMARY KEY AUTO_INCREMENT, name VARCHAR (255) NOT NULL, lastName VARCHAR (255) NOT NULL, age TINYINT NOT NULL)";
         try (Statement statement = util.getConnection().createStatement()) {
             statement.executeUpdate(CREATE_TABLE);
         } catch (SQLException e) {
-            System.err.println("Ошибка при создании таблицы: " + e.getMessage());
+            System.out.println("Таблица не создалась" + e);
         }
     }
 
@@ -31,7 +27,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
         try ( Statement statement = util.getConnection().createStatement()) {
             statement.executeUpdate("DROP TABLE IF EXISTS users");
         } catch (SQLException e) {
-            System.err.println("Ошибка при удалении таблицы: " + e.getMessage());
+            System.out.println("Таблица не удалилась " + e);
         }
     }
 
@@ -44,7 +40,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
             preparedStatement.setByte(3,age);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            System.err.println("Ошибка при сохранении пользователя: " + e.getMessage());
+            System.out.println("Не удалось добавить пользователя " + e);
         }
     }
 
@@ -56,7 +52,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            System.err.println("Ошибка при удалении пользователя: " + e.getMessage());
+            System.out.println("Не удалось удалить пользователя " + e);
         }
     }
 
@@ -84,7 +80,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
         ) {
             statement.executeUpdate("TRUNCATE TABLE users");
         } catch (SQLException e) {
-            System.err.println("Ошибка при очистке таблицы: " + e.getMessage());
+            System.out.println("Не удалось почистить таблицу " + e);
         }
     }
 }

@@ -3,6 +3,7 @@ package jm.task.core.jdbc.model;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.logging.Logger;
 
 @Table
 public class User {
@@ -18,9 +19,9 @@ public class User {
     @Column
     private Byte age;
 
-    public User() {
+    private static Logger logger = Logger.getLogger("User.class");
 
-    }
+
 
     @Override
     public String toString() {
@@ -31,6 +32,7 @@ public class User {
         this.name = name;
         this.lastName = lastName;
         this.age = age;
+        logger.info("Пользователь " + name + " " + lastName + " возрастом " + age + " добавлен в таблицу");
     }
 
     public Long getId() {
