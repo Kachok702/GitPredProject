@@ -13,16 +13,18 @@ public class Main {
 
         userService.createUsersTable();
 
+
+
         userService.saveUser("Marsel", "Shaikhulov", (byte) 22);
         userService.saveUser("Liza", "Sidorova", (byte) 19);
         userService.saveUser("Dima", "Petrov", (byte) 25);
         userService.saveUser("Liza", "Ivanova", (byte) 20);
 
 
-        List<User> users = userService.getAllUsers();
+        List<User> users2 = userService.getAllUsers();
         System.out.println("Список пользователей:");
-        users.forEach(System.out::println);
-        userService.cleanUsersTable();
-        userService.dropUsersTable();
+        users2.forEach(System.out::println);
+//        userService.cleanUsersTable();
+//        userService.dropUsersTable();
     }
 }

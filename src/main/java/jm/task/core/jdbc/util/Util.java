@@ -1,12 +1,17 @@
-
 package jm.task.core.jdbc.util;
+
+
+import jm.task.core.jdbc.model.User;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.*;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Properties;
 
 public class Util {
@@ -23,5 +28,19 @@ public class Util {
             throw new RuntimeException(e);
         }
     }
+
+   public static SessionFactory getConnectionHibernate() throws IOException {
+       ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+
+       Properties properties = new Properties();
+       properties.load(classLoader.getResourceAsStream("hibernate.properties"));
+
+       SessionFactory sessionFactory = new Configuration()
+               .addProperties(properties)
+               .addAnnotatedClass(User.class)
+               .buildSessionFactory();
+       return sessionFactory;
+    }
+
 }
 
